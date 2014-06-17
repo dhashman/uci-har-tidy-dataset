@@ -9,10 +9,13 @@
 #   2. A tidy dataset consisting of the mean of the variables from the combined dataset
 #        summarized by activity and subject_id (180 observations).
 # 
+# By default, only the tidy dataset is written to a file. Optionally, the combined dataset
+# can also be written to a file by uncommented the appropriate lines of code below.
+#
 # These files can be subsequently read back in using read.csv as shown below to re-create
 # the data tables for further analysis.
 #
-# To prove that the re-created data tables are identical, run something like:
+# To prove that the re-created data table(s) is/are identical, use the compare package:
 #
 # library(compare)
 # new_combined_dt <- data.table(read.csv(combined_file, stringsAsFactors = F))
@@ -128,9 +131,10 @@ test_dt <- cbind(test_labels_dt, test_subject_dt, test_dt)
 combined_dt <- rbind(train_dt, test_dt)
 setkeyv(combined_dt, c("activity", "subject_id"))
 
-# Create comma-separated flat file of the combined data table in the current working directory.
-combined_file <- "./Combined UCI HAR Dataset.txt"
-write.table(combined_dt, file = combined_file, sep = ",", row.names = F)
+# Optional: Create comma-separated flat file of the combined data table in the current working directory.
+# If file is wanted, uncomment the two lines below.
+# combined_file <- "./Combined UCI HAR Dataset.txt"
+# write.table(combined_dt, file = combined_file, sep = ",", row.names = F)
 
 # Create tidy data table of the means of each variable by activity and subject_id.
 tidy_dt <- combined_dt[, lapply(.SD, mean), by = list(activity, subject_id)]
