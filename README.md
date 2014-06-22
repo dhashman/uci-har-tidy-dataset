@@ -112,13 +112,13 @@ From each sampled observation of the 33 processed signals, a feature vector cons
 Each feature was normalized and bounded within [-1,1], making it a unitless measure. The feature vector for each observation was represented by a row in the randomly partitioned X_test.txt and X_train.txt files.
 
 ## Purpose and description of the 'run_analysis.R' script
-The purpose of the 'run_analysis.R' script is to create a tidy dataset consisting of a subset of the UCI HAR Dataset for use as input in further analysis.
+The purpose of the 'run_analysis.R' script is to create a tidy dataset consisting of a subset of the UCI HAR Dataset, The tidy dataset is written out as a comma-separated text file that can be subsequently read back in using read.csv to re-create the data table for further analysis.
 
 The script first generates a combined subset of the data by extracting the mean and standard deviation features for each of the 33 processed signals in the X_test.txt and X_train.txt files, for a total of 66 features out of the 561 available features in the feature vector. Other features with 'mean' in their names, such as meanFreq(), were intentionally excluded because they only pertained to a subset of the processed signals.
 
 This combined subset contains 10299 observations of 68 variables (with activity and subject appended to the 66 features). The combined subset is then further reduced by calculating the mean of the observations by activity and subject pair. The resultant tidy dataset consists of 180 observations (6 activities * 30 subjects) of the same 68 variables and is saved as a comma-separated text file in the current working directory.
 
-Specifically, the scripts accomplishes the following:
+Specifically, the script accomplishes the following:
 - Downloads a cloud-based zipped copy of the UCI HAR dataset ("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip") if it does not already exist in the current working directory.
 - Unzips the "UCI HAR Dataset" folder if it does not already exist in the current working directory.
 - Creates a data table of activity names (from the "/activity_labels.txt" file in the unzipped folder) in lower case with a descriptive column name. <b>(NOTE: This relates to Requirement 3 of the Course Project: Uses descriptive activity names to name the activities in the data set.)</b>
