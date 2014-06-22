@@ -150,9 +150,9 @@ Specifically, the script accomplishes the following:
 - Creates a data table of test observations ("/test/X_test.txt" in the unzipped folder), keeping only the previously identified columns with mean and standard deviation measurements, using the descriptive feature names, and inserting columns for activity and subject_id). <b>(NOTE: This relates to Requirement 2 of the Course Project: Extracts only the measurements on the mean and standard deviation for each measurement.)</b>
 - Combines the training and test data tables into a new data table, ordered by activity and subject_id. <b>(NOTE: This relates to Requirement 1 of the Course Project: Merges the training and the test sets to create one data set.)</b>
 - Creates a tidy data table from the combined data table, calculating the means of each variable in the combined data table by activity and subject_id pair. <b>(NOTE: This relates to Requirement 5 of the Course Project: Creates a second, independent tidy data set with the average of each variable for each activity and each subject.)</b>
-- Creates a comma-separated flat file of the tidy data table ("./Tidy UCI HAR Dataset.txt") in the current working directory. <b>(NOTE: This relates to Requirement 5 of the Course Project: Creates a second, independent tidy data set with the average of each variable for each activity and each subject.)</b>
+- Creates a comma-separated flat text file of the tidy data table ("./Tidy UCI HAR Dataset.txt") in the current working directory. <b>(NOTE: This relates to Requirement 5 of the Course Project: Creates a second, independent tidy data set with the average of each variable for each activity and each subject.)</b>
 
-The tidy flat file can be subsequently read back in using <b>read.csv</b> to re-create the data table for further analysis (ex: my_dt <- data.table(read.csv(tidy_file, stringsAsFactors = F))). To prove that the re-created data table is identical, use the compare package as illustrated below:
+The tidy flat text file can be subsequently read back in using <b>read.csv</b> to re-create the data table for further analysis (ex: my_dt <- data.table(read.csv(tidy_file, stringsAsFactors = F))). To prove that the re-created data table is identical, use the compare package as illustrated below:
 
 > library(compare)
 
@@ -160,4 +160,4 @@ The tidy flat file can be subsequently read back in using <b>read.csv</b> to re-
 
 > print(compare(data.frame(new_tidy_dt),data.frame(tidy_dt)))
 
-For detailed information on the flat file output of this script, please consult the associated CodeBook.md in this repository.
+The tidy flat file can also be imported to Excel as a comma-separated text file. For detailed information on the flat file output of this script, please consult the associated CodeBook.md in this repository.

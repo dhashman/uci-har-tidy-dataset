@@ -6,8 +6,9 @@
 # This script extracts a cloud-based zipped copy of the UCI HAR Dataset and creates a tidy dataset 
 # consisting of the mean of 66 selected variables summarized by activity and subject_id pair (180 observations).
 #
-# The tidy dataset is written out as a comma-separated text file that can be subsequently read back in
-# using read.csv as shown below to re-create the data table for further analysis.
+# The tidy dataset is written out as a comma-separated flat text file that can be subsequently read back in
+# using read.csv as shown below to re-create the data table for further analysis. The tidy flat file can also be
+# imported to Excel as a comma-separated text file.
 #
 # To prove that the re-created data table is identical, use the compare package:
 #
@@ -131,6 +132,6 @@ setkeyv(combined_dt, c("activity", "subject_id"))
 # This tidy dataset consists of 180 observations (1 observation per activity and subject_id pair).
 tidy_dt <- combined_dt[, lapply(.SD, mean), by = list(activity, subject_id)]
 
-# Create comma-separated flat file of the tidy data table in the current working directory.
+# Create comma-separated flat text file of the tidy data table in the current working directory.
 tidy_file <- "./Tidy UCI HAR Dataset.txt"
 write.table(tidy_dt, file = tidy_file, sep = ",", row.names = F)
