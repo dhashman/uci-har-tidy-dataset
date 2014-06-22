@@ -47,7 +47,7 @@ The magnitude of these three-dimensional signals was also calculated. The names 
 
 The frequency domain signals were obtained by applying a Fast Fourier Transform (FFT) to some of the signals. The names of these 9 signals are prefixed by:
 - 'freq_body_accel' by axis (3 variables),
-- 'freq_body_accel_jerk'by axis (3 variables), or 
+- 'freq_body_accel_jerk' by axis (3 variables), or 
 - 'freq_body_gyro' by axis (3 variables).
 
 The magnitude of these three-dimensional signals was also calculated. The names of these 4 signals are prefixed by:
