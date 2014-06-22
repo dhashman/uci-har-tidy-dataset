@@ -3,26 +3,19 @@
 #
 # See http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
 #
-# This script extracts a cloud-based zipped copy of the HAR Dataset and creates two datasets:
-#   1. A combined dataset consisting of the mean and standard deviation of 33 variables
-#        across 10,299 observations in the training and test datasets by activity and subject_id.
-#   2. A tidy dataset consisting of the mean of the variables from the combined dataset
-#        summarized by activity and subject_id (180 observations).
-# 
-# By default, only the tidy dataset is written to a file. Optionally, the combined dataset
-# can also be written to a file by uncommented the appropriate lines of code below.
+# This script extracts a cloud-based zipped copy of the UCI HAR Dataset and creates a tidy dataset 
+# consisting of the mean of 66 selected variables summarized by activity and subject_id pair (180 observations).
 #
-# These files can be subsequently read back in using read.csv as shown below to re-create
-# the data tables for further analysis.
+# The tidy dataset is written out as a comma-separated text file that can be subsequently read back in
+# using read.csv as shown below to re-create the data table for further analysis.
 #
-# To prove that the re-created data table(s) is/are identical, use the compare package:
+# To prove that the re-created data table is identical, use the compare package:
 #
 # library(compare)
-# new_combined_dt <- data.table(read.csv(combined_file, stringsAsFactors = F))
 # new_tidy_dt <- data.table(read.csv(tidy_file, stringsAsFactors = F))
-# print(compare(data.frame(new_combined_dt),data.frame(combined_dt)))
 # print(compare(data.frame(new_tidy_dt),data.frame(tidy_dt)))
 
+# load packages data.table and reshape2
 library(data.table)
 library(reshape2)
 
@@ -128,11 +121,14 @@ for (i in 1:length(test_dt)) {
 test_dt <- cbind(test_labels_dt, test_subject_dt, test_dt)
 
 # Combine training and test data tables into new data table, ordered by activity and subject_id.
+# This combined dataset consists of the mean and standard deviation of 33 variables
+# across 10,299 observations in the training and test datasets.
 combined_dt <- rbind(train_dt, test_dt)
 setkeyv(combined_dt, c("activity", "subject_id"))
 
 # Create tidy data table from the combined data table,
 # calculating the means of each variable by activity and subject_id pair.
+# This tidy dataset consists of 180 observations (1 observation per activity and subject_id pair).
 tidy_dt <- combined_dt[, lapply(.SD, mean), by = list(activity, subject_id)]
 
 # Create comma-separated flat file of the tidy data table in the current working directory.
