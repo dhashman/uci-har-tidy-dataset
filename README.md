@@ -42,7 +42,7 @@ In the X_test.txt and X_train.txt datasets, the 33 processed signals fall into t
 - 13 frequency domain signals (with a prefix of 'f').
 
 The time domain signals came from the accelerometer and gyroscope 3-axial raw signals filtered to remove noise. The acceleration signal was separated into body and gravity acceleration signals. These signals are prefixed with:
-- 'tBodyAcc' by axis,
+- 'tBodyAcc' by 3-dimensional axis (X, Y, and Z),
 - 'tGravityAcc' by axis, or
 - 'tBodyGyro' by axis.  
 
@@ -116,17 +116,17 @@ The purpose of the 'run_analysis.R' script is to create a tidy dataset consistin
 
 The script first generates a combined subset of the data by extracting the mean and standard deviation features for each of the 33 processed signals in the X_test.txt and X_train.txt files, for a total of 66 features out of the 561 available features in the feature vector. Other features with 'mean' in their names, such as meanFreq(), were intentionally excluded because they only pertained to a subset of the processed signals.
 
-This combined subset contains 10299 observations of 68 variables (with activity and subject appended to the 66 features). The combined subset is then further reduced by calculating the mean of the observations by activity and subject. The resultant tidy dataset consists of 180 observations (6 activities * 30 subjects) of the same 68 variables and is saved as a comma-separated text file in the current working directory.
+This combined subset contains 10299 observations of 68 variables (with activity and subject appended to the 66 features). The combined subset is then further reduced by calculating the mean of the observations by activity and subject pair. The resultant tidy dataset consists of 180 observations (6 activities * 30 subjects) of the same 68 variables and is saved as a comma-separated text file in the current working directory.
 
 Specifically, the scripts accomplishes the following:
 - Downloads a cloud-based zipped copy of the UCI HAR dataset ("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip") if it does not already exist in the current working directory.
 - Unzips the "UCI HAR Dataset" folder if it does not already exist in the current working directory.
-- Creates a data table of activity names (from the "/activity_labels.txt" file in the unzipped folder) in lower case with a descriptive column name.
-- Creates a data table of feature names (from the "/features.txt" file in the unzipped folder), eliminating the first column, and adding a descriptive column name.
-- Determines which feature names identify mean and standard deviation measurements.
-- Translates the row numbers of the selected feature names into column numbers.
-- Keeps only the mean and standard deviation feature names.
-- Makes feature names more descriptive by following Hadley wickham's style guide (http://adv-r.had.co.nz/Style.html) by changing:
+- Creates a data table of activity names (from the "/activity_labels.txt" file in the unzipped folder) in lower case with a descriptive column name. <b>(NOTE: This relates to Requirement 3 of the Course Project: Uses descriptive activity names to name the activities in the data set.)</b>
+- Creates a data table of feature names (from the "/features.txt" file in the unzipped folder), eliminating the first column, and adding a descriptive column name. <b>(NOTE: This relates to Requirement 2 of the Course Project: Extracts only the measurements on the mean and standard deviation for each measurement.)</b>
+- Determines which feature names identify mean and standard deviation measurements. <b>(NOTE: This relates to Requirement 2 of the Course Project: Extracts only the measurements on the mean and standard deviation for each measurement.)</b>
+- Translates the row numbers of the selected feature names into column numbers. <b>(NOTE: This relates to Requirement 2 of the Course Project: Extracts only the measurements on the mean and standard deviation for each measurement.)</b>
+- Keeps only the mean and standard deviation feature names. <b>(NOTE: This relates to Requirement 2 of the Course Project: Extracts only the measurements on the mean and standard deviation for each measurement.)</b>
+- Makes feature names more descriptive by following Hadley wickham's style guide (http://adv-r.had.co.nz/Style.html) by changing <b>(NOTE: This relates to Requirement 4 of the Course Project: Appropriately labels the data set with descriptive variable names.)</b>:
     - 'BodyBody' to 'body_'
     - 'Body' to 'body_'
     - The leading 'f' to 'freq_'
@@ -142,25 +142,22 @@ Specifically, the scripts accomplishes the following:
     - '-std()-Z' to 'zaxis_stddev'
     - 'Mag-mean() to 'magn_avg'
     - 'Mag-std()' to 'magn_stddev'
-- Creates a data table of subject IDs from the training dataset ("/train/subject_train.txt" in the unzipped folder"), adding a descriptive column name.
-- Creates a data table of subject IDs from the test dataset ("/test/subject_test.txt" in the unzipped folder), adding a descriptive column name.
-- Creates a data table of activity IDs from the training dataset ("/train/y_train.txt" in the unzipped folder), adding a descriptive column name, and replacing the activity IDs with their associated activity names.
-- Creates a data table of activity IDs from the test dataset ("/test/y_test.txt" in the unzipped folder), adding a descriptive column name, and replacing the activity IDs with their associated activity names.
-- Creates a data table of the training observations ("/train/X_train.txt" in the unzipped folder), keeping only the previously identified columns with mean and standard deviation measurements, using the descriptive feature names, and inserting columns for activity and subject_id).
-- Creates a data table of test observations ("/test/X_test.txt" in the unzipped folder), keeping only the previously identified columns with mean and standard deviation measurements, using the descriptive feature names, and inserting columns for activity and subject_id).
-- Combines the training and test data tables into a new data table, ordering by activity and subject_id.
-- Optional: Creates a comma-separated flat file of the combined data table ("./Combined UCI HAR Dataset.txt") in the current working directory.
-- Creates a tidy data table of the means of each variable in the combined data table, summarized by activity and subject_id.
-- Creates a comma-separated flat file of the tidy data table ("./Tidy UCI HAR Dataset.txt") in the current working directory.
+- Creates a data table of subject IDs from the training dataset ("/train/subject_train.txt" in the unzipped folder"), adding a descriptive column name. <b>(NOTE: This relates to Requirement 4 of the Course Project: Appropriately labels the data set with descriptive variable names.)</b>
+- Creates a data table of subject IDs from the test dataset ("/test/subject_test.txt" in the unzipped folder), adding a descriptive column name. <b>(NOTE: This relates to Requirement 4 of the Course Project: Appropriately labels the data set with descriptive variable names.)</b>
+- Creates a data table of activity IDs from the training dataset ("/train/y_train.txt" in the unzipped folder), adding a descriptive column name, and replacing the activity IDs with their associated activity names. <b>(NOTE: This relates to Requirement 4 of the Course Project: Appropriately labels the data set with descriptive variable names.)</b>
+- Creates a data table of activity IDs from the test dataset ("/test/y_test.txt" in the unzipped folder), adding a descriptive column name, and replacing the activity IDs with their associated activity names. <b>(NOTE: This relates to Requirement 4 of the Course Project: Appropriately labels the data set with descriptive variable names.)</b>
+- Creates a data table of the training observations ("/train/X_train.txt" in the unzipped folder), keeping only the previously identified columns with mean and standard deviation measurements, using the descriptive feature names, and inserting columns for activity and subject_id). <b>(NOTE: This relates to Requirement 2 of the Course Project: Extracts only the measurements on the mean and standard deviation for each measurement.)</b>
+- Creates a data table of test observations ("/test/X_test.txt" in the unzipped folder), keeping only the previously identified columns with mean and standard deviation measurements, using the descriptive feature names, and inserting columns for activity and subject_id). <b>(NOTE: This relates to Requirement 2 of the Course Project: Extracts only the measurements on the mean and standard deviation for each measurement.)</b>
+- Combines the training and test data tables into a new data table, ordered by activity and subject_id. <b>(NOTE: This relates to Requirement 1 of the Course Project: Merges the training and the test sets to create one data set.)</b>
+- Creates a tidy data table from the combined data table, calculating the means of each variable in the combined data table by activity and subject_id pair. <b>(NOTE: This relates to Requirement 5 of the Course Project: Creates a second, independent tidy data set with the average of each variable for each activity and each subject.)</b>
+- Creates a comma-separated flat file of the tidy data table ("./Tidy UCI HAR Dataset.txt") in the current working directory. <b>(NOTE: This relates to Requirement 5 of the Course Project: Creates a second, independent tidy data set with the average of each variable for each activity and each subject.)</b>
 
-The flat file(s) can be subsequently read back in using read.csv to re-create the data table(s) for further analysis (ex: my_dt <- data.table(read.csv(combined_file, stringsAsFactors = F))). To prove that the re-created data table(s) is/are identical, use the compare package as illustrated below:
+The tidy flat file can be subsequently read back in using <b>read.csv</b> to re-create the data table for further analysis (ex: my_dt <- data.table(read.csv(tidy_file, stringsAsFactors = F))). To prove that the re-created data table is identical, use the compare package as illustrated below:
 
 > library(compare)
 
-> new_combined_dt <- data.table(read.csv(combined_file, stringsAsFactors = F))
-
 > new_tidy_dt <- data.table(read.csv(tidy_file, stringsAsFactors = F))
 
-> print(compare(data.frame(new_combined_dt),data.frame(combined_dt)))
-
 > print(compare(data.frame(new_tidy_dt),data.frame(tidy_dt)))
+
+For detailed information on the flat file output of this script, please consult the associated CodeBook.md in this repository.

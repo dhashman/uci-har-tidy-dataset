@@ -127,16 +127,12 @@ for (i in 1:length(test_dt)) {
 }
 test_dt <- cbind(test_labels_dt, test_subject_dt, test_dt)
 
-# Combine training and test data tables into new data table, ordering by activity and subject_id.
+# Combine training and test data tables into new data table, ordered by activity and subject_id.
 combined_dt <- rbind(train_dt, test_dt)
 setkeyv(combined_dt, c("activity", "subject_id"))
 
-# Optional: Create comma-separated flat file of the combined data table in the current working directory.
-# If file is wanted, uncomment the two lines below.
-# combined_file <- "./Combined UCI HAR Dataset.txt"
-# write.table(combined_dt, file = combined_file, sep = ",", row.names = F)
-
-# Create tidy data table of the means of each variable by activity and subject_id.
+# Create tidy data table from the combined data table,
+# calculating the means of each variable by activity and subject_id pair.
 tidy_dt <- combined_dt[, lapply(.SD, mean), by = list(activity, subject_id)]
 
 # Create comma-separated flat file of the tidy data table in the current working directory.
